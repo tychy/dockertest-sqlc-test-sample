@@ -1,7 +1,9 @@
 # dockertest-sqlc-test-sample
 ## 検証方法
 ```
-go test
+ % go test
+PASS
+ok      dockertest-sqlc-test-sample     3.307s
 ```
 
 ## 参考文献
