@@ -1,4 +1,4 @@
-package main_test
+package main
 
 import (
 	"context"
@@ -116,25 +116,8 @@ func TestUpdateUserAgesWithTransaction(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	c := context.Background()
-	tx, err := conn.Begin(c)
+	err = IncrementUserAges(context.Background(), conn, q, u.ID)
 	if err != nil {
-		t.Fatal(err)
-	}
-
-	q := q.WithTx(tx)
-	u, err = q.GetUser(c, u.ID)
-	if err != nil {
-		t.Fatal(err)
-	}
-	err = q.UpdateUserAges(c, db.UpdateUserAgesParams{
-		ID:  u.ID,
-		Age: u.Age + 1,
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if err := tx.Commit(c); err != nil {
 		t.Fatal(err)
 	}
 
